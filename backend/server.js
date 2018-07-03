@@ -1,23 +1,69 @@
-const express = require("express");
-
 const WebSocket = require("ws");
+const ADD_TOPIC = "ADD_TOPIC";
+const ADD_VOTE = "ADD_VOTE";
 
-// const app = express();
+let dataStore = {};
+let topics = ["react", "css"];
 
-// app.get("/", (req, res) => res.send("hello"));
+function Votes({ TYPE, vote, topic }, ip) {
+  const result = {
+    [ip]: {
+      vote,
+      topic
+    }
+  };
+
+  dataStore[topic] = { ...dataStore[topic], ...result };
+
+  // if (TYPE === ADD_TOPIC) {
+  //   dataStore[topic]
+  //     ? (dataStore[topic] = { ...dataStore[topic], ...result })
+  //     : (dataStore[topic] = { ...dataStore[topic], ...result });
+  // }
+  // if (TYPE === ADD_VOTE) {
+  //   dataStore[topic]
+  //     ? (dataStore[topic] = { ...dataStore[topic], ...result })
+  //     : (dataStore[topic] = { ...dataStore[topic], ...result });
+  // }
+}
 
 const wss = new WebSocket.Server({ port: 3002 });
 
-wss.on("connection", function connection(ws) {
-  // send welcome on first connecttion
-  ws.send("Hi there, I am a Constructor Labs Websocket server");
+wss.on("connection", (ws, req) => {
+  ws.send(
+    JSON.stringify({
+      message: "Hi there, I am a Constructor Labs Websocket monster",
+      votes: dataStore,
+      topics
+    })
+  );
 
-  // now send ech message reviced to each client
-  ws.on("message", function incoming(data) {
-    wss.clients.forEach(function each(client) {
-      console.log(client !== ws, client.readyState === WebSocket.OPEN);
+  ws.on("message", dataIn => {
+    const data = JSON.parse(dataIn);
+    wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(data);
+        if (data.TYPE === ADD_TOPIC) {
+          console.log(ADD_TOPIC);
+          topics.push(data.newTopic);
+          client.send(
+            JSON.stringify({
+              message: "New Vote just in",
+              votes: dataStore,
+              topics
+            })
+          );
+        }
+        if (data.TYPE === ADD_VOTE) {
+          console.log(ADD_VOTE);
+          Votes(data, req.connection.remoteAddress);
+          client.send(
+            JSON.stringify({
+              message: "New Vote just in",
+              votes: dataStore,
+              topics
+            })
+          );
+        }
       }
     });
   });

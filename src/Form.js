@@ -17,10 +17,10 @@ export class Form extends Component {
       <div>
         <form
           onSubmit={event =>
-            this.props.submitMessage(event, this.state.currentInput)
+            this.props.submitNewTopic(event, this.state.currentInput)
           }
         >
-          <label>message for server</label>
+          <label>Add new topic </label>
           <input onChange={this.handelChange} value={this.state.currentInput} />
         </form>
       </div>
