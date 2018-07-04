@@ -4,16 +4,16 @@ import "./App.css";
 import { Form } from "./Form";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-import { Buttons } from "./Buttons";
-import { Results } from "./Results";
+import { Topic } from "./Topic";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      options: ["camel", "duck", "donut", "potato", "mash"],
       data: {
         message: "",
-        votes: [],
+        votes: {},
         topics: []
       }
     };
@@ -21,7 +21,7 @@ class App extends Component {
     this.submitVote = this.submitVote.bind(this);
   }
   componentDidMount() {
-    this.socket = new WebSocket("ws://192.168.1.85:3002");
+    this.socket = new WebSocket("ws://192.168.0.151:3002");
 
     this.socket.addEventListener("message", event => {
       const { data } = event;
@@ -54,9 +54,14 @@ class App extends Component {
           <p className="App-intro">{this.state.data.message}</p>
           <Form submitNewTopic={this.submitNewTopic} />
           {this.state.data.topics.map(topic => (
-            <Buttons key={topic} topic={topic} submitVote={this.submitVote} />
+            <Topic
+              key={topic}
+              topic={topic}
+              submitVote={this.submitVote}
+              votes={this.state.data.votes}
+              options={this.state.options}
+            />
           ))}
-          <Results data={this.state.data.votes} />
         </div>
       </ErrorBoundary>
     );

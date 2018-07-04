@@ -26,22 +26,21 @@ export class Buttons extends React.Component {
     );
   }
   render() {
-    const { topic } = this.props;
+    const { topic, options } = this.props;
     // if (this.state.click > 4) {
     //   throw new Error(`We searched for ${topic} last time! try and differnt `);
     // }
     return (
       <div key={topic}>
         <h1>{topic}</h1>
-        <Button title="Camel" topic={topic} submitVote={this.handelClick} />
-        <Button title="Duck" topic={topic} submitVote={this.handelClick} />
-        <Button title="Donut" topic={topic} submitVote={this.handelClick} />
-        <Button title="Potato" topic={topic} submitVote={this.handelClick} />
-        <Button
-          title="Mash Potato"
-          topic={topic}
-          submitVote={this.handelClick}
-        />
+        {options.map(tag => (
+          <Button
+            key={tag}
+            title={tag}
+            topic={topic}
+            submitVote={this.handelClick}
+          />
+        ))}
       </div>
     );
   }

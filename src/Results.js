@@ -1,55 +1,37 @@
 import React, { Component } from "react";
+import { Graph } from "./Graph";
 
-const props = {
-  react: {
-    "::ffff:192.168.1.85": {
-      topic: "react",
-      vote: "camel"
-    },
-    "::ffff:192.168.1.105": {
-      topic: "react",
-      vote: "donut"
+function convertVotesToGraphData(topicccccc, votes, options) {
+  const result = Object.entries(votes).reduce((acc, [id, { vote, topic }]) => {
+    if (topicccccc === topic) {
+      const currentTotal = acc[vote] ? acc[vote] : 0;
+      acc[vote] = currentTotal + 1;
     }
-  },
-  css: {
-    "::ffff:192.168.1.85": {
-      topic: "react",
-      vote: "duck"
-    },
-    "::ffff:192.168.1.105": {
-      topic: "react",
-      vote: "duck"
-    }
-  }
-};
-
-const score = {
-  camel: 5,
-  duck: 4,
-  donut: 3,
-  potato: 2,
-  "Mash Potato": 1
-};
-
-const SingleResult = ({ data }) => (
-  <div>
-    <label>{data.vote} </label>
-    <progress max="5" value={score[data.vote]} />
-  </div>
-);
+    return acc;
+  }, {});
+  return options.map(voteType => {
+    console.log(result[voteType]);
+    return result[voteType]
+      ? { item: voteType, votes: result[voteType] }
+      : { item: voteType, votes: 0 };
+  });
+}
 
 export class Results extends Component {
   render() {
+    if (typeof this.props.votes === "undefined") {
+      return null;
+    }
+
+    const graphData = convertVotesToGraphData(
+      this.props.topic,
+      this.props.votes,
+      this.props.options
+    );
+
     return (
       <div>
-        {Object.keys(props).map(topic => (
-          <div key={topic}>
-            <h2>{topic}</h2>
-            {Object.keys(props[topic]).map(x => (
-              <SingleResult key={x} data={props[topic][x]} />
-            ))}
-          </div>
-        ))}
+        <Graph graphData={graphData} />
       </div>
     );
   }
