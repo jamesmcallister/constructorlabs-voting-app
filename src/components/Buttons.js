@@ -28,7 +28,10 @@ export class Buttons extends React.Component {
   render() {
     const { topic, options } = this.props;
     // if (this.state.click > 4) {
-    //   throw new Error(`We searched for ${topic} last time! try and differnt `);
+    //   throw new Error(`
+    //   Stop pressing buttons!!
+    //   ${topic} was your last choice and now your stuck with it.
+    //   `);
     // }
     return (
       <div key={topic}>

@@ -1,0 +1,33 @@
+{
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true,
+    "jest": true
+  },
+
+  "globals": {
+    "module": false,
+    "browser": true,
+    "Promise": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["react-app", "prettier"],
+  "plugins": ["react-app", "prettier"],
+  "rules": {
+    "no-undefined": "error",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "no-unused-expressions": "off",
+    "react/prop-types": 0,
+    "react/jsx-curly-spacing": 0,
+    "react/jsx-wrap-multilines": 0,
+    "jsx-ally/href-no-hash": 0
+  }
+}

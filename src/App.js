@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import logo from "./constructor-labs-badge.png";
+
 import "./App.css";
-import { Form } from "./Form";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-import { Topic } from "./Topic";
+import { Form } from "./Form";
+import { Topic } from "./components/Topic";
+import { Header } from "./components/Header";
 
 class App extends Component {
   constructor() {
@@ -22,12 +23,8 @@ class App extends Component {
   }
   componentDidMount() {
     this.socket = new WebSocket("ws://192.168.0.151:3002");
-
-    this.socket.addEventListener("message", event => {
-      const { data } = event;
-      this.setState(prevState => ({
-        data: { ...JSON.parse(data) }
-      }));
+    this.socket.addEventListener("message", ({ data }) => {
+      this.setState({ data: { ...JSON.parse(data) } });
     });
   }
   componentDidCatch(error, info) {
@@ -45,23 +42,21 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundary>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome Constructor Labs</h1>
-            <h2>Vote NOW, fellow Potatos!!!!!</h2>
-          </header>
-          <p className="App-intro">{this.state.data.message}</p>
-          <Form submitNewTopic={this.submitNewTopic} />
-          {this.state.data.topics.map(topic => (
-            <Topic
-              key={topic}
-              topic={topic}
-              submitVote={this.submitVote}
-              votes={this.state.data.votes}
-              options={this.state.options}
-            />
-          ))}
+        <div className="app">
+          <Header message={this.state.data.message} />
+
+          <main class="main">
+            <Form submitNewTopic={this.submitNewTopic} />
+            {this.state.data.topics.map(topic => (
+              <Topic
+                key={topic}
+                topic={topic}
+                submitVote={this.submitVote}
+                votes={this.state.data.votes}
+                options={this.state.options}
+              />
+            ))}
+          </main>
         </div>
       </ErrorBoundary>
     );
