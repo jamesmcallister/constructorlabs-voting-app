@@ -28,9 +28,8 @@ body {
 }
 .main {
   grid-area: main;
-  display: flex;
-  max-width: 30em;
   justify-content: center;
+  padding: 2vw;
 }
 .buttons {
 }
@@ -58,6 +57,12 @@ body {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.VotesRoute {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1vw;
 }
 
 @-webkit-keyframes fadein {

@@ -2,10 +2,10 @@ const WebSocket = require("ws");
 const ADD_TOPIC = "ADD_TOPIC";
 const ADD_VOTE = "ADD_VOTE";
 const port = 3002;
-
-let dataStore = {};
-let topicsObj = { react: "", css: "" };
-
+const dummie = require("./dummie.json");
+let voteDataStore = { ...dummie.votes };
+// let topicsObj = { react: "", css: "" };
+let topicsObj = { ...dummie.topics };
 function addNewVote({ vote, topic }, ip) {
   const result = {
     [ip]: {
@@ -13,13 +13,14 @@ function addNewVote({ vote, topic }, ip) {
       topic
     }
   };
-  dataStore[topic] = { ...dataStore[topic], ...result };
+
+  voteDataStore[topic] = { ...voteDataStore[topic], ...result };
 }
 
 function formatReply(message) {
   return JSON.stringify({
     message: message,
-    votes: dataStore,
+    votes: voteDataStore,
     topics: Object.keys(topicsObj)
   });
 }

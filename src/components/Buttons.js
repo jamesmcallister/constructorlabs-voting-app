@@ -27,15 +27,14 @@ export class Buttons extends React.Component {
   }
   render() {
     const { topic, options } = this.props;
-    // if (this.state.click > 4) {
-    //   throw new Error(`
-    //   Stop pressing buttons!!
-    //   ${topic} was your last choice and now your stuck with it.
-    //   `);
-    // }
+    if (this.state.click > 20) {
+      throw new Error(`
+      Stop pressing buttons!!
+      ${topic} is getting angry now..: "" }
+      `);
+    }
     return (
-      <div key={topic}>
-        <h1>{topic}</h1>
+      <div>
         {options.map(tag => (
           <Button
             key={tag}

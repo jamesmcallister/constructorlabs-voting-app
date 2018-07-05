@@ -26,7 +26,7 @@ function totalVotes(data) {
 export class Results extends Component {
   render() {
     if (typeof this.props.votes === "undefined") {
-      return null;
+      return <div>no votes in yet</div>;
     }
     const graphData = convertVotesToGraphData(
       this.props.topic,
@@ -37,8 +37,9 @@ export class Results extends Component {
 
     return (
       <div>
-        {total}
+        <h1>{this.props.topic}</h1>
         <Graph graphData={graphData} options={this.props.options} />
+        Total votes so far {total}
       </div>
     );
   }

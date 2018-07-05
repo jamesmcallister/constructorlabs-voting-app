@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { Route, Switch, Link } from "react-router-dom";
-import "./App.css";
-import { ErrorBoundary } from "./ErrorBoundary";
+import { Route, Switch } from "react-router-dom";
 
+import { ErrorBoundary } from "./ErrorBoundary";
 import { Form } from "./Form";
-import { Topic } from "./components/Topic";
 import { Header } from "./components/Header";
-import { Results } from "./components/Results";
+
+import { TopicRoute } from "./routes/TopicRoute";
+import { VotesRoute } from "./routes/VotesRoute";
+import { TopicsRoute } from "./routes/TopicsRoute";
+import { HomeRoute } from "./routes/HomeRoute";
+import { Route404 } from "./routes/Route404";
 
 class App extends Component {
   constructor() {
@@ -23,7 +26,7 @@ class App extends Component {
     this.submitVote = this.submitVote.bind(this);
   }
   componentDidMount() {
-    this.socket = new WebSocket("ws://192.168.0.151:3002");
+    this.socket = new WebSocket("ws://192.168.1.85:3002");
     this.socket.addEventListener("message", ({ data }) => {
       this.setState({ data: { ...JSON.parse(data) } });
     });
@@ -45,37 +48,28 @@ class App extends Component {
           <Header message={this.state.data.message} />
           <main className="main">
             <Switch>
-              <Route exact path="/" component={() => <div>Home</div>} />
+              <Route exact path="/" component={() => <HomeRoute />} />
               <Route
                 exact
                 path="/votes"
-                render={() =>
-                  this.state.data.topics.map(topic => (
-                    <Results
-                      key={topic}
-                      topic={topic}
-                      votes={this.state.data.votes[topic]}
-                      options={this.state.options}
-                    />
-                  ))
-                }
+                render={() => (
+                  <VotesRoute
+                    topics={this.state.data.topics}
+                    options={this.state.options}
+                    votes={this.state.data.votes}
+                  />
+                )}
               />
               <Route
                 exact
                 path="/topics"
-                render={() =>
-                  this.state.data.topics.map(topic => (
-                    <Link key={topic} to={`/topic/${topic}`}>
-                      {topic}
-                    </Link>
-                  ))
-                }
+                render={() => <TopicsRoute topics={this.state.data.topics} />}
               />
               <Route
                 exact
                 path="/topic/:topicid"
                 render={({ match }) => (
-                  <Topic
+                  <TopicRoute
                     key={match.params.topicid}
                     topic={match.params.topicid}
                     submitVote={this.submitVote}
@@ -89,7 +83,7 @@ class App extends Component {
                 path="/newtopic"
                 render={() => <Form submitNewTopic={this.submitNewTopic} />}
               />
-              <Route component={() => <div>404 error</div>} />
+              <Route component={({ match }) => <Route404 {...match} />} />
             </Switch>
           </main>
         </div>
