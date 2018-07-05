@@ -32,7 +32,7 @@ export const Header = props => {
           </Link>
         </nav>
       </div>
-      <div>{props.message}</div>
+      <div className="message">{props.message}</div>
     </header>
   );
 };

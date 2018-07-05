@@ -39,13 +39,26 @@ wss.on("connection", (ws, req) => {
       if (client.readyState === WebSocket.OPEN) {
         if (data.TYPE === ADD_TOPIC) {
           addNewTopic(data.newTopic);
-          client.send(formatReply("New Vote just in"));
+          client.send(formatReply("New Level Added"));
         }
         if (data.TYPE === ADD_VOTE) {
           addNewVote(data, req.connection.remoteAddress);
-          client.send(formatReply("New Vote just in"));
+          client.send(formatReply(`${data.vote} Vote just in`));
         }
       }
     });
   });
 });
+
+var express = require("express");
+const server = express();
+var path = require("path");
+
+server.use(express.static(__dirname + "/build"));
+
+server.get("/", (req, res) => {
+  res.sendfile(path.join(__dirname + "/build/index.html"));
+});
+
+const expressPort = process.env.PORT || 8080;
+server.listen(expressPort);
