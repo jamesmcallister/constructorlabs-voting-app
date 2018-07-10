@@ -1,11 +1,10 @@
 import WebSocket from "ws";
-// @ts-ignore
-import dummie from "../dummie.json";
+
+import dummie from "./dummie.js";
 
 const ADD_TOPIC = "ADD_TOPIC";
 const ADD_VOTE = "ADD_VOTE";
 let voteDataStore = { ...dummie.votes };
-// let topicsObj = { react: "", css: "" };
 let topicsObj = { ...dummie.topics };
 function addNewVote({ vote, topic }, ip) {
   const result = {
