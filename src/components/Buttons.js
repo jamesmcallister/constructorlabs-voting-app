@@ -4,7 +4,6 @@ const Button = ({ submitVote, title, topic }) => {
   return (
     <button
       onClick={event => submitVote(event, { topic, name: title })}
-      topic={topic}
       name={title}
     >
       {title}

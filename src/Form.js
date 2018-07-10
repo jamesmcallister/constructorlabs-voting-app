@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export class Form extends Component {
   constructor() {
-    super();
+    super(null);
     this.state = {
       currentInput: ""
     };

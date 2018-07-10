@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Graph } from "./Graph";
 
 function convertVotesToGraphData(currentTopic, votes, options) {
+  // @ts-ignore
   const result = Object.entries(votes).reduce((acc, [id, { vote, topic }]) => {
     if (currentTopic === topic) {
       const currentTotal = acc[vote] ? acc[vote] : 0;

@@ -13,7 +13,7 @@ import { Route404 } from "./routes/Route404";
 import { FullscreenRoute } from "./routes/FullscreenRoute";
 class App extends Component {
   constructor() {
-    super();
+    super(null);
     this.state = {
       options: ["camel", "duck", "donut", "potato", "mash"],
       data: {

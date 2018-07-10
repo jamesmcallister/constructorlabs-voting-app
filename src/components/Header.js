@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// @ts-ignore
 import logo from "../images/constructor-labs-badge.png";
 
 export const Header = props => {
