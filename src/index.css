@@ -18,8 +18,7 @@ body {
   flex-direction: column;
   text-align: center;
 }
-.header__item {
-}
+
 .nav {
   margin: 20px;
 }
@@ -31,10 +30,11 @@ body {
   justify-content: center;
   padding: 2vw;
 }
-.buttons {
-}
 .graph {
   max-width: 400px;
+}
+.graph__fullscreen {
+  max-width: 100vh;
 }
 .message {
   visibility: hidden;

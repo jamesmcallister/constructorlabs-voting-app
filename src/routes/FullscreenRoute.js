@@ -4,7 +4,7 @@ import { Results } from "../components/Results";
 
 export const FullscreenRoute = ({ topic, submitVote, votes, options }) => {
   return (
-    <div>
+    <div className="graph__fullscreen">
       <Results topic={topic} votes={votes[topic]} options={options} />
     </div>
   );

@@ -6,12 +6,23 @@
     "node": "8.11.3"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.52",
+    "@babel/preset-env": "^7.0.0-beta.52",
+    "@babel/preset-react": "^7.0.0-beta.52",
+    "babel-loader": "^8.0.0-beta",
+    "clean-webpack-plugin": "^0.1.19",
+    "esm": "^3.0.64",
     "express": "^4.16.3",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "victory": "^0.27.2",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-middleware": "^3.1.3",
     "ws": "^5.2.1"
   },
   "devDependencies": {
@@ -28,8 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server:w": "nodemon ./server.js",
-    "server": "node ./server.js",
+    "server:w": "NODE_ENV='development' nodemon ./server.js",
+    "server": "NODE_ENV='development' node ./server.js",
     "heroku": "npm run build && npm run server"
   }
 }

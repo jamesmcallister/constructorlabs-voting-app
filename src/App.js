@@ -10,7 +10,7 @@ import { VotesRoute } from "./routes/VotesRoute";
 import { TopicsRoute } from "./routes/TopicsRoute";
 import { HomeRoute } from "./routes/HomeRoute";
 import { Route404 } from "./routes/Route404";
-
+import { FullscreenRoute } from "./routes/FullscreenRoute";
 class App extends Component {
   constructor() {
     super();
@@ -70,6 +70,19 @@ class App extends Component {
                 path="/topic/:topicid"
                 render={({ match }) => (
                   <TopicRoute
+                    key={match.params.topicid}
+                    topic={match.params.topicid}
+                    submitVote={this.submitVote}
+                    votes={this.state.data.votes}
+                    options={this.state.options}
+                  />
+                )}
+              />{" "}
+              <Route
+                exact
+                path="/fullscreen/:topicid"
+                render={({ match }) => (
+                  <FullscreenRoute
                     key={match.params.topicid}
                     topic={match.params.topicid}
                     submitVote={this.submitVote}
