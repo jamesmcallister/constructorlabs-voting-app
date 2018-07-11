@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Graph } from "./Graph";
 
 function convertVotesToGraphData(currentTopic, votes, options) {
@@ -45,3 +46,9 @@ export class Results extends Component {
     );
   }
 }
+
+Results.PropTypes = {
+  votes: PropTypes.arrayOf(PropTypes.string),
+  topic: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string)
+};

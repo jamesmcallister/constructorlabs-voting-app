@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // @ts-ignore
 import logo from "../images/constructor-labs-badge.png";
 
-export const Header = props => {
+export const Header = ({ message }) => {
   return (
     <header className="header">
       <div className="header__item">
@@ -33,7 +34,11 @@ export const Header = props => {
           </Link>
         </nav>
       </div>
-      <div className="message">{props.message}</div>
+      <div className="message">{message}</div>
     </header>
   );
+};
+
+Header.PropType = {
+  message: PropTypes.string
 };

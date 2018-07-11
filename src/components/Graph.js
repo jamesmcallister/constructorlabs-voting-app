@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
 
 export class Graph extends Component {
@@ -14,3 +15,8 @@ export class Graph extends Component {
     );
   }
 }
+
+Graph.PropTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
+  graphData: PropTypes.array
+};

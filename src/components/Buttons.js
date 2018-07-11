@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { SingleButton } from "./SingelButton";
+import { SingleButton } from "./SingleButton";
 
 export class Buttons extends React.Component {
   constructor(props) {
