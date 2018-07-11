@@ -1,15 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Button = ({ submitVote, title, topic }) => {
-  return (
-    <button
-      onClick={event => submitVote(event, { topic, name: title })}
-      name={title}
-    >
-      {title}
-    </button>
-  );
-};
+import { SingleButton } from "./SingelButton";
 
 export class Buttons extends React.Component {
   constructor(props) {
@@ -35,7 +27,7 @@ export class Buttons extends React.Component {
     return (
       <div>
         {options.map(tag => (
-          <Button
+          <SingleButton
             key={tag}
             title={tag}
             topic={topic}
@@ -46,3 +38,9 @@ export class Buttons extends React.Component {
     );
   }
 }
+
+Buttons.PropTypes = {
+  topic: PropTypes.string,
+  submitVote: PropTypes.func,
+  options: PropTypes.arrayOf(PropTypes.string)
+};
