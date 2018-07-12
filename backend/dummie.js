@@ -118,6 +118,20 @@ export default {
       }
     }
   },
+  retros: {
+    Yellow: {
+      "::ffff:192.168.1.85": {
+        color: "Yellow",
+        text: "Woohoo"
+      }
+    },
+    Red: {
+      "::ffff:192.168.1.85": {
+        color: "Red",
+        text: "Ahhhh!!!"
+      }
+    }
+  },
   topics: {
     react: "",
     css: "",

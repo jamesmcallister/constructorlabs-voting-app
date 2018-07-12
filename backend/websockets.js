@@ -8,7 +8,7 @@ const ADD_RETRO = "ADD_RETRO";
 
 let voteDataStore = { ...dummie.votes };
 let topicsObj = { ...dummie.topics };
-let retroDataStore = {};
+let retroDataStore = { ...dummie.retros };
 
 function addNewVote({ vote, topic }, ip) {
   const result = {
@@ -42,8 +42,10 @@ function addNewTopic(newTopic) {
  */
 function addNewRetro({ color, text }, ip) {
   const result = {
-    color,
-    text
+    [ip]: {
+      color,
+      text
+    }
   };
 
   retroDataStore[color] = { ...retroDataStore[color], ...result };
