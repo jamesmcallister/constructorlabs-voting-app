@@ -1,5 +1,5 @@
 import React from "react";
-import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
 
 /**
  * @param {object} props
@@ -9,7 +9,7 @@ import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
  */
 export const Graph = ({ options, graphData }) => {
   return (
-    <VictoryChart>
+    <VictoryChart theme={VictoryTheme.material}>
       <VictoryAxis tickValues={[1, 2, 3, 4, 5]} tickFormat={options} />
       <VictoryBar data={graphData} x="item" y="votes" />
     </VictoryChart>
