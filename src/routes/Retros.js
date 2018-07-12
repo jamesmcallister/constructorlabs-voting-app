@@ -51,9 +51,12 @@ export class Retros extends Component {
         </div>
         <div>
           <h1>The good the bad the ugly...</h1>
-          {Object.keys(this.props.retros).map(item => (
-            <RetroCards key={item} {...this.props.retros[item]} />
-          ))}
+          {Object.keys(this.props.retros).map(item =>
+            // @ts-ignore
+            Object.entries(this.props.retros[item]).map(([ip, data]) => (
+              <RetroCards key={data.text} {...data} />
+            ))
+          )}
         </div>
       </div>
     );
