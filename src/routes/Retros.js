@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../assets/css/retros.css';
 
 class Form extends Component {
   constructor(props) {
@@ -34,8 +35,9 @@ class Form extends Component {
 
 const RetroCards = ({ color, text }) => (
   <li>
-    <h3>{color}</h3>
-    <div>{text}</div>
+    <div className="postit">
+      <div className={color.toLowerCase()}>{text}</div>
+    </div>
   </li>
 );
 
@@ -44,20 +46,20 @@ export class Retros extends Component {
     return (
       <div>
         <div>
-          <h2>Red</h2>
-          <Form type="Red" submitNewRetro={this.props.submitNewRetro} />
           <h2>Yellow</h2>
           <Form type="Yellow" submitNewRetro={this.props.submitNewRetro} />
+          <h2>Pink</h2>
+          <Form type="Red" submitNewRetro={this.props.submitNewRetro} />
         </div>
-        <div>
-          <h1>The good the bad the ugly...</h1>
+        <h1>The good the bad the ugly...</h1>
+        <ul className="postit-wall">
           {Object.keys(this.props.retros).map(item =>
             // @ts-ignore
             Object.entries(this.props.retros[item]).map(([ip, data]) => (
               <RetroCards key={data.text} {...data} />
             ))
           )}
-        </div>
+        </ul>
       </div>
     );
   }

@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
+.postit-wall {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.postit-wall {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.postit {
+    transform: rotate(-1deg);
+    font-family: 'Kalam', cursive;
+}
+
+.postit .red,
+.postit .yellow {
+    font-family: 'Kalam', cursive;
+}
+
+.yellow {
+    line-height: 1;
+    text-align: center;
+    width: 275px;
+    margin: 25px;
+    min-height: 185px;
+    max-height: 245px;
+    padding-top: 35px;
+    position: relative;
+    border: 1px solid #E8E8E8;
+    border-top: 60px solid #fdfd86!important;
+    font-size: 22px;
+    border-bottom-right-radius: 60px 5px;
+    display: inline-block;
+    background: #fdfd86;
+}
+*, :after, :before{
+  box-sizing: inherit;
+}
+.yellow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -0px;
+    bottom: 20px;
+    width: 200px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    transform: matrix(-1, -0.1, 0, 1, 0, 0);
+}
+
+
+.red {
+    line-height: 1;
+    text-align: center;
+    width: 275px;
+    margin: 25px;
+    min-height: 185px;
+    max-height: 245px;
+    padding-top: 35px;
+    position: relative;
+    border: 1px solid #E8E8E8;
+    border-top: 60px solid #FD9DC0!important;
+    font-size: 22px;
+    border-bottom-right-radius: 60px 5px;
+    display: inline-block;
+    background: #FD9DC0;
+}
+*, :after, :before{
+  box-sizing: inherit;
+}
+.red:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -0px;
+    bottom: 20px;
+    width: 200px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    transform: matrix(-1, -0.1, 0, 1, 0, 0);
+}
