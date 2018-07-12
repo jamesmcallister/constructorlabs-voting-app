@@ -1,22 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
 
-export class Graph extends Component {
-  render() {
-    return (
-      <VictoryChart>
-        <VictoryAxis
-          tickValues={[1, 2, 3, 4, 5]}
-          tickFormat={this.props.options}
-        />
-        <VictoryBar data={this.props.graphData} x="item" y="votes" />
-      </VictoryChart>
-    );
-  }
-}
-
-Graph.PropTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
-  graphData: PropTypes.array
+/**
+ * @param {object} props
+ * @param {Array} props.options
+ * @param {object} props.graphData
+ * @returns
+ */
+export const Graph = ({ options, graphData }) => {
+  return (
+    <VictoryChart>
+      <VictoryAxis tickValues={[1, 2, 3, 4, 5]} tickFormat={options} />
+      <VictoryBar data={graphData} x="item" y="votes" />
+    </VictoryChart>
+  );
 };
