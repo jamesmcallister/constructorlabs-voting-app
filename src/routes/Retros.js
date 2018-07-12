@@ -32,7 +32,12 @@ class Form extends Component {
   }
 }
 
-const Reults = ({ data }) => <li>as</li>;
+const RetroCards = ({ color, text }) => (
+  <li>
+    <h3>{color}</h3>
+    <div>{text}</div>
+  </li>
+);
 
 export class Retros extends Component {
   render() {
@@ -44,9 +49,12 @@ export class Retros extends Component {
           <h2>Yellow</h2>
           <Form type="Yellow" submitNewRetro={this.props.submitNewRetro} />
         </div>
-        {Object.keys(this.props.retros).map(item => (
-          <Reults key={item} data={this.props.retros[item]} />
-        ))}
+        <div>
+          <h1>The good the bad the ugly...</h1>
+          {Object.keys(this.props.retros).map(item => (
+            <RetroCards key={item} {...this.props.retros[item]} />
+          ))}
+        </div>
       </div>
     );
   }

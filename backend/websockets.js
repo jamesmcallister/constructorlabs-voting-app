@@ -42,10 +42,8 @@ function addNewTopic(newTopic) {
  */
 function addNewRetro({ color, text }, ip) {
   const result = {
-    [ip]: {
-      color,
-      text
-    }
+    color,
+    text
   };
 
   retroDataStore[color] = { ...retroDataStore[color], ...result };
