@@ -11,19 +11,22 @@ import { TopicsRoute } from "./routes/TopicsRoute";
 import { HomeRoute } from "./routes/HomeRoute";
 import { Route404 } from "./routes/Route404";
 import { FullscreenRoute } from "./routes/FullscreenRoute";
+import { Retros } from "./routes/Retros";
 class App extends Component {
-  constructor() {
-    super(null);
+  constructor(props) {
+    super(props);
     this.state = {
       options: ["camel", "duck", "donut", "potato", "mash"],
       data: {
         message: "",
         votes: {},
-        topics: []
+        topics: [],
+        retros: []
       }
     };
     this.submitNewTopic = this.submitNewTopic.bind(this);
     this.submitVote = this.submitVote.bind(this);
+    this.submitNewRetro = this.submitNewRetro.bind(this);
   }
   componentDidMount() {
     this.socket = new WebSocket("ws://192.168.1.85:3002");
@@ -41,6 +44,13 @@ class App extends Component {
     const result = { TYPE: "ADD_VOTE", vote: name, topic: topic };
     this.socket.send(JSON.stringify(result));
   }
+
+  submitNewRetro(event, { color, text }) {
+    event.preventDefault();
+    const result = { TYPE: "ADD_RETRO", color, text };
+    this.socket.send(JSON.stringify(result));
+  }
+
   render() {
     return (
       <ErrorBoundary>
@@ -95,6 +105,16 @@ class App extends Component {
                 exact
                 path="/newtopic"
                 render={() => <Form submitNewTopic={this.submitNewTopic} />}
+              />
+              <Route
+                exact
+                path="/retros"
+                render={() => (
+                  <Retros
+                    retros={this.state.data.retros}
+                    submitNewRetro={this.submitNewRetro}
+                  />
+                )}
               />
               <Route component={({ match }) => <Route404 {...match} />} />
             </Switch>

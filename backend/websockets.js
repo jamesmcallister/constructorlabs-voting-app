@@ -4,8 +4,12 @@ import dummie from "./dummie.js";
 
 const ADD_TOPIC = "ADD_TOPIC";
 const ADD_VOTE = "ADD_VOTE";
+const ADD_RETRO = "ADD_RETRO";
+
 let voteDataStore = { ...dummie.votes };
 let topicsObj = { ...dummie.topics };
+let retroDataStore = {};
+
 function addNewVote({ vote, topic }, ip) {
   const result = {
     [ip]: {
@@ -21,12 +25,30 @@ function formatReply(message) {
   return JSON.stringify({
     message: message,
     votes: voteDataStore,
-    topics: Object.keys(topicsObj)
+    topics: Object.keys(topicsObj),
+    retros: retroDataStore
   });
 }
 
 function addNewTopic(newTopic) {
   topicsObj[newTopic.toLowerCase()] = "";
+}
+
+/**
+ * @param {object} item
+ * @param {string} item.color
+ * @param {string} item.text
+ * @param {string} ip
+ */
+function addNewRetro({ color, text }, ip) {
+  const result = {
+    [ip]: {
+      color,
+      text
+    }
+  };
+
+  retroDataStore[color] = { ...retroDataStore[color], ...result };
 }
 
 export const websocketServer = ({ PORT }) => {
@@ -48,6 +70,10 @@ export const websocketServer = ({ PORT }) => {
             case ADD_VOTE:
               addNewVote(data, req.connection.remoteAddress);
               client.send(formatReply(`${data.vote} Vote just in`));
+              break;
+            case ADD_RETRO:
+              addNewRetro(data, req.connection.remoteAddress);
+              client.send(formatReply(`${data.color} New Retro just in`));
               break;
             default:
               console.log("nope");
