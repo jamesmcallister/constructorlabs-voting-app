@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 export class Form extends Component {
-  constructor() {
-    super(null);
+  constructor(props) {
+    super(props);
     this.state = {
       currentInput: ""
     };
